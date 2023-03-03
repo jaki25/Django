@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% block title %}Home page {% endblock %}
+{% block content%}
+
+    {% if user.is_authenticated %}
+        {% for list in el.all %}:
+            {% if list in user.todolist.all %}
+
+                <h1><a href="/{{list.id}}">{{list.name}}    ({{user.username}})</a></h1><br>
+            {% else %}
+                <h1 style="color='green'">{{list.name}}   </h1><br>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h3>Ulogujte se da bi ste vidjeli vasu kreiranu listu obaveza. </h3>
+
+
+        <br>
+        <p>Ukoliko nemate nalog, registrujte se...</p>
+        <div class="btn btn-success"><a href="/register">Registruj se</a></div>
+        <hr>
+
+    {% endif %}
+{% endblock %}
